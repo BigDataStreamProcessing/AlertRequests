@@ -36,7 +36,7 @@ public class ApacheLogToAlertRequests {
         KTable<Windowed<String>, Long> ipCounts = apacheLogStream
                 .map((key, value) -> KeyValue.pair(???, ""))
                 .groupByKey()
-                .windowedBy(TimeWindows.of(Duration.???(10)) /* time-based window */)
+                .windowedBy(TimeWindows.ofSizeWithNoGrace(Duration.???(10)) /* time-based window */)
                 .count();
 
         KTable<String, String> difficultIps = ipCounts.toStream()
